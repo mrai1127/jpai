@@ -26,7 +26,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    //creating a checkout session for payment integration
     @PostMapping("/create-checkout-session")
     public ResponseEntity<StripeResponse> checkoutList(@RequestBody List<CheckoutItemDto> checkoutItemDtoList) throws StripeException {
         Session session = orderService.createSession(checkoutItemDtoList);
