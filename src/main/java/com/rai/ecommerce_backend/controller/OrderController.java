@@ -32,4 +32,6 @@ public class OrderController {
         StripeResponse stripeResponse = new StripeResponse(session.getId());
         return new ResponseEntity<>(stripeResponse, HttpStatus.OK);
     }
+
+    //This is the complete version of the code
 }
