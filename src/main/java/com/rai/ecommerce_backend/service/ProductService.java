@@ -3,6 +3,7 @@ package com.rai.ecommerce_backend.service;
 import com.rai.ecommerce_backend.dto.ProductDto;
 import com.rai.ecommerce_backend.entity.Category;
 import com.rai.ecommerce_backend.entity.Product;
+import com.rai.ecommerce_backend.exception.ProductNotExistException;
 import com.rai.ecommerce_backend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,5 +63,13 @@ public class ProductService {
         product1.setName(productDto.getName());
         product1.setPrice(productDto.getPrice());
         productRepository.save(product1);
+    }
+
+    public Product findById(Integer productId) throws ProductNotExistException {
+       Optional<Product> optionalProduct = productRepository.findById(productId);
+       if(optionalProduct.isEmpty()){
+           throw new ProductNotExistException("product is not valid" + productId);
+       }
+       return optionalProduct.get();
     }
 }
